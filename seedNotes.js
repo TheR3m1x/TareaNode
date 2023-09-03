@@ -1,13 +1,16 @@
-// Cargar los datos de prueba en la base de datos
 const fs = require('fs');
 const mongoose = require('mongoose');
-const Note = require('./models/Note'); // Asegúrate de importar tu modelo de notas
+const Note = require('./database.js'); // Asegúrate de importar tu modelo de notas
 
 // Ruta al archivo notes.json
 const notesFilePath = './notes.json';
 
-// Configura la conexión a MongoDB (ajusta la cadena de conexión según tu configuración)
-const mongoURI = 'mongodb+srv://juanalejandroe1:11588264@cluster0.taz3tow.mongodb.net/tareaDevops';
+
+const { MONGO_DB_USR, MONGO_DB_PWD, MONGO_DB_HOST, MONGO_DB_PORT } = process.env;
+const credentials = MONGO_DB_USR ? `${MONGO_DB_USR}:${MONGO_DB_PWD}@` : "";
+const mongoURI = `mongodb+srv://${credentials}${MONGO_DB_HOST}/tareaDevops`;
+
+
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
