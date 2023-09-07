@@ -12,6 +12,8 @@ las variables de entorno necesarias para que funcione el programa son:
 3. MONGO_DB_HOST
 4. MONGO_DB_PORT
 
+Nota: este esta diseñado para usar el MongoDB Atlas en tal caso.
+
 las cuales se encuentran en el archivo ".env" después de intalar las depencias necesarias.
 
 ## Servicios de apoyos
@@ -23,3 +25,4 @@ la aplicación esta expuesta por el puerto 3000
 ## 12 factor apps
 
 Se completó todos los factores dados en las condiciones de la práctica.
+
