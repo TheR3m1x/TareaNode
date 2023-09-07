@@ -7,21 +7,28 @@ require("dotenv").config();
 const { MONGO_DB_USR, MONGO_DB_PWD, MONGO_DB_HOST, MONGO_DB_PORT } =
   process.env;
 const credentials = MONGO_DB_USR ? `${MONGO_DB_USR}:${MONGO_DB_PWD}@` : "";
-const mongoURI = `mongodb://${credentials}${MONGO_DB_HOST}:${MONGO_DB_PORT}/`;
+const mongoURI = `mongodb+srv://${credentials}${MONGO_DB_HOST}/tareaDevops`;
 
-/* Connecting to the database before each test. */
-beforeAll(async () => {
-    await mongoose.connect(mongoURI);
-});
-
+// Actualiza la configuración de conexión a MongoDB
+const mongooseOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
+  
+  // Conéctate a la base de datos utilizando las opciones actualizadas
+  beforeAll(async () => {
+    await mongoose.connect(mongoURI, mongooseOptions);
+  });
+  
 afterAll(async () => {
-    // Closing the DB connection allows Jest to exit successfully.
     try {
         await mongoose.connection.close();
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        throw error; // Re-throw the error
     }
 });
+
 
 /* Testing the API endpoints. */
 
